@@ -5,6 +5,7 @@ import celestial from "@/assets/logo-celestial.png";
 import echo from "@/assets/logo-echo.png";
 import pulse from "@/assets/logo-pulse.png";
 import quantum from "@/assets/logo-quantum.png";
+import Image from "next/image";
 
 import { motion } from "framer-motion";
 
