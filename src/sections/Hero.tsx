@@ -93,7 +93,8 @@ export const Hero = () => {
         </h1>
 
         <p className="text-lg md:text-xl text-white/70 text-center max-w-xl mx-auto">
-        {"Elevate your site's visibility affordably with AI — where smart technology meets a user-friendly SEO tool."}
+        {`Elevate your site's visibility affordably with AI — where smart technology meets a user-friendly SEO tool.`}
+
 
         </p>
 
