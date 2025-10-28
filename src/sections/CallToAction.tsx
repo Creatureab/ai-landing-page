@@ -1,41 +1,64 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
 import Button from "@/components/Button";
 import stars from "@/assets/stars.png";
 import gridlines from "@/assets/grid-lines.png";
 
 export const CallToAction = () => {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
 
-  // Framer-motion scroll tracking
+  // scroll parallax
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-
-  // Smooth vertical parallax
   const backgroundPositionY = useTransform(scrollYProgress, [0, 1], [-300, 300]);
 
-  
+  // motion values for cursor position (percent)
+  const mouseX = useMotionValue(50); // percent
+  const mouseY = useMotionValue(40); // percent
+
+  // smooth them
+  const smoothX = useSpring(mouseX, { stiffness: 150, damping: 30 });
+  const smoothY = useSpring(mouseY, { stiffness: 150, damping: 30 });
+
+  // combine into a single mask CSS string
+  const mask = useTransform([smoothX, smoothY], ([x, y]) =>
+    // adjust size (40% 40%) and inner stop (60%) to taste
+    // produce both -webkit-mask-image and mask-image compatible value
+    `radial-gradient(40% 40% at ${x}% ${y}%, black 60%, transparent 100%)`
+  );
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+    // clamp to 0..100 just in case
+    mouseX.set(Math.max(0, Math.min(100, x)));
+    mouseY.set(Math.max(0, Math.min(100, y)));
+  };
 
   return (
     <section
       ref={sectionRef}
+      onMouseMove={handleMouseMove}
       className="py-20 md:py-24 relative overflow-hidden flex justify-center items-center"
     >
       <div className="container relative">
         <motion.div
           className="relative border border-white/15 py-24 rounded-xl overflow-hidden bg-black flex flex-col justify-center items-center group"
-          animate={{
-            backgroundPositionX: stars.width, // fallback width
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 60,
-            ease: "linear",
-          }}
+          animate={{ backgroundPositionX: stars.width }} // harmless fallback
+          transition={{ repeat: Infinity, duration: 60, ease: "linear" }}
           style={{
             backgroundImage: `url(${stars.src})`,
             backgroundSize: "cover",
@@ -43,42 +66,31 @@ export const CallToAction = () => {
             backgroundPositionX: "center",
           }}
         >
-          {/* 💡 Animated Purple Lamp Glow */}
-          <div className="absolute inset-0 flex justify-center items-center">
+          {/* Purple lamp glow */}
+          <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
             <motion.div
               className="w-[700px] h-[700px] bg-purple-600/40 blur-[160px] rounded-full"
               animate={{ opacity: [0.3, 0.6, 0.3] }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            ></motion.div>
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            />
           </div>
 
-          {/* 💜 Grid overlay with radial mask */}
-          <div
-            className="absolute inset-0 bg-[rgb(74,32,138)] bg-blend-overlay"
+          {/* Grid overlay that follows cursor */}
+          <motion.div
+            className="absolute inset-0 bg-[rgb(74,32,138)] bg-blend-overlay pointer-events-none"
             style={{
               backgroundImage: `url(${gridlines.src})`,
-              maskImage:
-                "[radial-gradient(50%_50%_at_50%_35,transparent) group-hover: opcity-0 transition duration-700]",
-              WebkitMaskImage:
-                "radial-gradient(60% 60% at 50% 40%, black 60%, transparent 100%)",
+              // apply both webkit and standard mask styles
+              WebkitMaskImage: mask as unknown as string,
+              maskImage: mask as unknown as string,
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              // smooth visual transition when the mask changes position/size
+              transition: "mask-position 0.08s linear, -webkit-mask-position 0.08s linear",
             }}
-          ></div>
-           <div
-            className="absolute inset-0 bg-[rgb(74,32,138)] bg-blend-overlay"
-            style={{
-              backgroundImage: `url(${gridlines.src})`,
-              maskImage:
-                "[radial-gradient(50%_50%_at_0px_0px,transparent) group-hover: opcity-100 transition duration-700]",
-              WebkitMaskImage:
-                "radial-gradient(60% 60% at 50% 40%, black 60%, transparent 100%)",
-            }}
-          ></div>
-
-          {/* ✨ Text content */}
+          />
+          
+          {/* Content */}
           <div className="relative z-10 text-center">
             <h2 className="text-5xl md:text-6xl max-w-xl mx-auto tracking-tighter font-medium text-white">
               AI-driven SEO for everyone.
