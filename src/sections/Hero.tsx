@@ -91,13 +91,9 @@ export const Hero = () => {
         <h1 className="text-8xl md:text-[168px] md:leading-none font-semibold tracking-tighter bg-[radial-gradient(100%_100%_at_top_left,white,white,rgb(74,32,138,.5))] text-transparent bg-clip-text text-center justify-center">
           AI SEO
         </h1>
-
-        <p className="text-lg md:text-xl text-white/70 text-center max-w-xl mx-auto">
-        {`Elevate your site's visibility affordably with AI — where smart technology meets a user-friendly SEO tool.`}
-
-
-        </p>
-
+        <span className="text-lg md:text-xl text-white/70 text-center max-w-xl mx-auto">
+        Elevate your site visibility affordably with AI — where smart technology meets a user-friendly SEO tool.
+        </span>
         <div className="flex justify-center mt-5">
           <Button>Join waitlist</Button>
         </div>
