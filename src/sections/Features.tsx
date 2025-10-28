@@ -98,7 +98,7 @@ const FeatureTab = (
         ></motion.div>
       )}
 
-      <div className="w-12 h-12 border border-white/15 rounded-full flex items-center justify-center">
+      <div className="w-12 h-12 border border-white/15 rounded-lg inline-flex items-center justify-center">
         <DotLottiePlayer
           ref={dotLottiePlayer}
           src={props.icon}
@@ -142,9 +142,10 @@ export const Features = () => {
   return (
     <section className="py-20 md:py-24">
       <div className="container">
-        <h2 className="text-5xl md:text-6xl font-medium text-center tracking-tighter">
+        <h2 className="text-5xl md:text-6xl max-w-2xl font-medium tracking-tighter text-center mx-auto">
           Elevate your SEO efforts.
         </h2>
+
 
         <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto tracking-tight text-center mt-5">
           From small startups to large enterprises, our AI-powered tools are
@@ -152,13 +153,13 @@ export const Features = () => {
           improve your online visibility.
         </p>
 
-        <div className="mt-10 flex flex-row gap-3 justify-center items-center">
+        <div className="mt-10 flex flex-col lg:flex-row gap-3 lg:flex-1 justify-center">
           {tabs.map((tab, tabIndex) => (
             <FeatureTab
               {...tab}
               selected={selectedTab === tabIndex}
               onClick={() => handleSelectTab(tabIndex)}
-              key={tab.title}
+              key={tab.title} className="border border:white/15 flex p-2.5 rounded-xl gap-2.5"
             />
           ))}
         </div>

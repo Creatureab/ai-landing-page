@@ -1,4 +1,5 @@
 // Button.tsx
+
 import React from "react";
 
 interface ButtonProps {
@@ -13,7 +14,7 @@ const Button = ({ children, className = "", onClick }: ButtonProps) => {
       onClick={onClick}
       className={`
         relative 
-        py-2.5 px-6 
+        py-2 px-3 
         rounded-lg 
         font-medium text-sm 
         text-white
