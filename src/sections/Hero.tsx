@@ -3,6 +3,7 @@ import { useRef } from "react";
 import stars from "@/assets/stars.png";
 import Button from "@/components/Button";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from 'next/image';
 
 export const Hero = () => {
   const Sectionref = useRef(null);
