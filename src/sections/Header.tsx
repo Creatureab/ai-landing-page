@@ -15,10 +15,10 @@ export const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-8 items-center">
             <nav className="flex gap-8">
-              <a href="#" className="hover:text-white transition">Features</a>
-              <a href="#" className="hover:text-white transition">Developers</a>
-              <a href="#" className="hover:text-white transition">Pricing</a>
-              <a href="#" className="hover:text-white transition">Changelog</a>
+              <a href="#" className="text-white/70 hover:text-white hover:brightness-125 hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition">Features</a>
+              <a href="#" className="text-white/70 hover:text-white hover:brightness-125 hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition">Developers</a>
+              <a href="#" className="text-white/70 hover:text-white hover:brightness-125 hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition">Pricing</a>
+              <a href="#" className="text-white/70 hover:text-white hover:brightness-125 hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition">Changelog</a>
             </nav>
             
             <div className="flex gap-4 items-center">

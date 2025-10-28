@@ -18,6 +18,8 @@ export const CallToAction = () => {
   // Smooth vertical parallax
   const backgroundPositionY = useTransform(scrollYProgress, [0, 1], [-300, 300]);
 
+  
+
   return (
     <section
       ref={sectionRef}
@@ -25,9 +27,9 @@ export const CallToAction = () => {
     >
       <div className="container relative">
         <motion.div
-          className="relative border border-white/15 py-24 rounded-xl overflow-hidden bg-black flex flex-col justify-center items-center"
+          className="relative border border-white/15 py-24 rounded-xl overflow-hidden bg-black flex flex-col justify-center items-center group"
           animate={{
-            backgroundPositionX: [0, stars.width || 800], // fallback width
+            backgroundPositionX: stars.width, // fallback width
           }}
           transition={{
             repeat: Infinity,
@@ -60,7 +62,17 @@ export const CallToAction = () => {
             style={{
               backgroundImage: `url(${gridlines.src})`,
               maskImage:
+                "[radial-gradient(50%_50%_at_50%_35,transparent) group-hover: opcity-0 transition duration-700]",
+              WebkitMaskImage:
                 "radial-gradient(60% 60% at 50% 40%, black 60%, transparent 100%)",
+            }}
+          ></div>
+           <div
+            className="absolute inset-0 bg-[rgb(74,32,138)] bg-blend-overlay"
+            style={{
+              backgroundImage: `url(${gridlines.src})`,
+              maskImage:
+                "[radial-gradient(50%_50%_at_0px_0px,transparent) group-hover: opcity-100 transition duration-700]",
               WebkitMaskImage:
                 "radial-gradient(60% 60% at 50% 40%, black 60%, transparent 100%)",
             }}

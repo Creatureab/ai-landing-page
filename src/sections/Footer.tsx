@@ -7,8 +7,8 @@ export const Footer = () => {
   return (
     <footer className="py-5 border-t border-white/15">
       <div className="container">
-        <div className="flex flex-col md:flex-row md:justify-between lg:items-center gap-8">
-          <div className="flex gap-2 items-center lg:flex-1">
+        <div className="flex flex-col lg:flex-row gap-5 items-center lg:gap-7 lg:flex-1">
+          <div className="flex gap-2 items-center">
             <Logo className="h-6 w-6" />
             <div className="font-medium">AI startup landing page</div>
           </div>
@@ -20,7 +20,7 @@ export const Footer = () => {
               <a href="#" className="hover:text-white transition">Changelog</a>
             </nav>
           </div>
-          <div className="flex gap-5 text-white/40">
+          <div className="flex gap-5 lg:flex-1 text-white/40">
             <Xsocial className="hover:text-white transition cursor-pointer" />
             <Instagramsocial className="hover:text-white transition cursor-pointer" />
             <YoutubeSocial className="hover:text-white transition cursor-pointer" />
