@@ -56,11 +56,11 @@ export const Testimonials = () => {
         </p>
 
         {/* Testimonial Row */}
-        <div className="overflow-hidden mt-10 [mask-image:linear-gradient(50%_50%_at_50%_35%,transparent,black_20%,black_80%,transparent)]">
+        <div className="overflow-hidden mt-10 [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
           <motion.div
             className="flex gap-5 pr-5 flex-none"
-            initial={{ x: 0 }}
-            animate={{ x: ["0%", "-50%"] }}
+            initial={{ translateX: "-50%" }}
+            animate={{ translateX: "0%" }}
             transition={{ duration: 20, ease: "linear", repeat: Infinity }}
           >
             {testimonials.concat(testimonials).map((testimonial, index) => (
