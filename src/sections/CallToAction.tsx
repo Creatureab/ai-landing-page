@@ -31,10 +31,10 @@ export const CallToAction = () => {
   const smoothY = useSpring(mouseY, { stiffness: 150, damping: 30 });
 
   // combine into a single mask CSS string
-  const mask = useTransform([smoothX, smoothY], ([x, y]) =>
+  const mask = useTransform([smoothX, smoothY], ([mouseX, mouseY]) =>
     // adjust size (40% 40%) and inner stop (60%) to taste
     // produce both -webkit-mask-image and mask-image compatible value
-    `radial-gradient(40% 40% at ${x}% ${y}%, black 60%, transparent 100%)`
+    `radial-gradient(50% 50% at ${mouseX}% ${mouseY}%, black 60%, transparent 100%)`
   );
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
@@ -56,7 +56,7 @@ export const CallToAction = () => {
     >
       <div className="container relative">
         <motion.div
-          className="relative border border-white/15 py-24 rounded-xl overflow-hidden bg-black flex flex-col justify-center items-center group"
+          className="relative border border-white/15 py-24 rounded-xl overflow-hidden bg-black flex flex-col justify-center items-center group-hover:opcity-0 transition duration-700"
           animate={{ backgroundPositionX: stars.width }} // harmless fallback
           transition={{ repeat: Infinity, duration: 60, ease: "linear" }}
           style={{
@@ -67,7 +67,7 @@ export const CallToAction = () => {
           }}
         >
           {/* Purple lamp glow */}
-          <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
+          <div className="absolute inset-0 inset-0 bg-[rgb(74,32,138) max-w-sm bg-blend-overlay [mask-image:radial-gradient(50%_50%_at_0px_0px,black,transparent opcity-0 group-hover:opcity-100 transition duration-700">
             <motion.div
               className="w-[700px] h-[700px] bg-purple-600/40 blur-[160px] rounded-full"
               animate={{ opacity: [0.3, 0.6, 0.3] }}
@@ -95,7 +95,7 @@ export const CallToAction = () => {
             <h2 className="text-5xl md:text-6xl max-w-xl mx-auto tracking-tighter font-medium text-white">
               AI-driven SEO for everyone.
             </h2>
-            <p className="text-lg md:text-xl max-w-md mx-auto text-white/70 mt-5 tracking-tight">
+            <p className="text-center text-lg px-4 md:text-xl max-w-xs mx-auto text-white/70 mt-5 tracking-tight">
               Achieve clear, impactful results without the complexity.
             </p>
             <div className="flex justify-center mt-8">
